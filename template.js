@@ -62,7 +62,7 @@ exports.template = function(grunt, init, done) {
     props.npm_test = 'grunt test';
     props.keywords = ['gruntplugin'];
     props.devDependencies = {
-      'grunt-contrib-jshint': '~0.6.0',
+      'grunt-coffeelint': '~0.0.8',
       'grunt-contrib-clean': '~0.4.0',
       'grunt-contrib-nodeunit': '~0.2.0',
     };
@@ -72,6 +72,18 @@ exports.template = function(grunt, init, done) {
 
     // Files to copy (and process).
     var files = init.filesToCopy(props);
+
+    // Convert .js to .coffee
+    Object.keys(files).forEach(function(f) {
+      if (f.substr(-3) === '.js') {
+        var fname = f.replace(/\.js$/, '.coffee');
+        files[fname] = files[f];
+
+        // remove old .js
+        delete files[f];
+      }
+    });
+    console.log(files);
 
     // Add properly-named license files.
     init.addLicenseFiles(files, props.licenses);

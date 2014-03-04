@@ -1,8 +1,8 @@
-'use strict';
+'use strict'
 
-var grunt = require('grunt');
+grunt = require 'grunt'
 
-/*
+###
   ======== A Handy Little Nodeunit Reference ========
   https://github.com/caolan/nodeunit
 
@@ -20,29 +20,25 @@ var grunt = require('grunt');
     test.throws(block, [error], [message])
     test.doesNotThrow(block, [error], [message])
     test.ifError(value)
-*/
+###
 
-exports.{%= short_name %} = {
-  setUp: function(done) {
-    // setup here if necessary
-    done();
-  },
-  default_options: function(test) {
-    test.expect(1);
+exports.{%= short_name %} =
+  setUp: (done) ->
+    
+    # setup here if necessary
+    done()
+    return
 
-    var actual = grunt.file.read('tmp/default_options');
-    var expected = grunt.file.read('test/expected/default_options');
-    test.equal(actual, expected, 'should describe what the default behavior is.');
+  default_options: (test) ->
+    test.expect 1
+    actual    = grunt.file.read "tmp/default_options"
+    expected  = grunt.file.read "test/expected/default_options"
+    test.equal actual, expected, "should describe what the default behavior is."
+    test.done()
 
-    test.done();
-  },
-  custom_options: function(test) {
-    test.expect(1);
-
-    var actual = grunt.file.read('tmp/custom_options');
-    var expected = grunt.file.read('test/expected/custom_options');
-    test.equal(actual, expected, 'should describe what the custom option(s) behavior is.');
-
-    test.done();
-  },
-};
+  custom_options: (test) ->
+    test.expect 1
+    actual    = grunt.file.read "tmp/custom_options"
+    expected  = grunt.file.read "test/expected/custom_options"
+    test.equal actual, expected, "should describe what the custom option(s) behavior is."
+    test.done()
